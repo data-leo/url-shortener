@@ -205,7 +205,10 @@ def redirect_to_url(short_code):
         print(f"Error in redirect_to_url: {str(e)}")  # 디버깅용 로그
         return jsonify({'error': f'Internal server error: {str(e)}'}), 500
 
+# 앱 시작시 데이터베이스 초기화
+with app.app_context():
+    init_db()  # 이 줄 추가
+
 if __name__ == '__main__':
-    init_db()
     port = int(os.getenv('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
